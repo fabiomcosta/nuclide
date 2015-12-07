@@ -14,7 +14,7 @@ import type {SourceOptions} from '../options/SourceOptions';
 
 const getDeclaredIdentifiers = require('../utils/getDeclaredIdentifiers');
 const getNamesFromID = require('../utils/getNamesFromID');
-const getNonDeclarationIdentifiers = require('../utils/getNonDeclarationIdentifiers');
+const getUndeclaredIdentifiers = require('../utils/getUndeclaredIdentifiers');
 const hasOneRequireDeclaration = require('../utils/hasOneRequireDeclaration');
 const isGlobal = require('../utils/isGlobal');
 const jscs = require('jscodeshift');
@@ -23,7 +23,7 @@ function removeUnusedRequires(
   root: Collection,
   options: SourceOptions,
 ): void {
-  const used = getNonDeclarationIdentifiers(root, options);
+  const used = getUndeclaredIdentifiers(root, options);
   const nonRequires = getDeclaredIdentifiers(
     root,
     options,
